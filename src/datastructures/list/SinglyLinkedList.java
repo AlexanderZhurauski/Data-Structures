@@ -1,5 +1,7 @@
 package datastructures.list;
 
+import datastructures.exceptions.EmptyListException;
+
 import java.util.Collection;
 
 public class SinglyLinkedList<E> implements IList<E> {
@@ -56,7 +58,8 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public void add(int index, E element) {
         if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
         }
 
         Node<E> currentNode = this.head;
@@ -75,7 +78,8 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public E get(int index) {
         if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
         }
 
         Node<E> currentNode = this.head;
@@ -88,14 +92,14 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public E getFirst() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException();
+            throw new EmptyListException("Cannot acquire the first element of an empty list!");
         }
         return this.head.getData();
     }
     @Override
     public E getLast() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException();
+            throw new EmptyListException("Cannot acquire the last element of an empty list!");
         }
         return this.tail.getData();
     }
@@ -103,7 +107,8 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public void set(int index, E element) {
         if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
         }
 
         Node<E> currentNode = this.head;
@@ -119,7 +124,7 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public void removeFirst() {
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException();
+            throw new EmptyListException("Cannot remove the first element of an empty list!");
         }
 
         this.head = this.head.getNext();
@@ -128,7 +133,8 @@ public class SinglyLinkedList<E> implements IList<E> {
     @Override
     public void remove(int index) {
         if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
         }
 
         if (index == 0) {
@@ -164,7 +170,7 @@ public class SinglyLinkedList<E> implements IList<E> {
         }
 
         if (isEmpty()) {
-            throw new IndexOutOfBoundsException();
+            return -1;
         }
 
         Node<E> currentNode = this.head;
