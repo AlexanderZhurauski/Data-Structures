@@ -111,7 +111,7 @@ public class DoublyLinkedList<E> implements IDoublyLinkedList<E> {
             throw new EmptyListException("Cannot acquire the first element of an empty list!");
         }
 
-        DoubleNode<E> nodeToRemove = this.header.getNext();
+        DoubleNode<E> nodeToRemove = this.trailer.getPrev();
         E returnValue = nodeToRemove.getData();
         this.trailer.setPrev(nodeToRemove.getPrev());
         nodeToRemove.getPrev().setNext(this.trailer);
@@ -124,9 +124,30 @@ public class DoublyLinkedList<E> implements IDoublyLinkedList<E> {
         if (isEmpty()) {
             throw new EmptyListException("Cannot acquire the first element of an empty list!");
         }
-        //TODO
 
-        return null;
+        if (index < 0 || index >= this.size) {
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
+        }
+
+        if (index == 0) {
+            return removeFirst();
+        } else if (index == size() - 1) {
+            return removeLast();
+        }
+
+        DoubleNode<E> currentNode = this.header.getNext();
+        int currentIndex = 0;
+        while (currentIndex < index) {
+            currentNode = currentNode.getNext();
+            currentIndex++;
+        }
+
+        currentNode.getPrev().setNext(currentNode.getNext());
+        currentNode.getNext().setPrev(currentNode.getPrev());
+        this.size--;
+
+        return currentNode.getData();
     }
 
     @Override
