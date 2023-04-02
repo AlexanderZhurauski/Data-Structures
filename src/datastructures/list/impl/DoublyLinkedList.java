@@ -21,7 +21,7 @@ public class DoublyLinkedList<E> implements IDoublyLinkedList<E> {
         if (element == null) {
             throw new NullPointerException();
         }
-        
+
         DoubleNode<E> newNode = new DoubleNode<>(element);
         if (isEmpty()) {
             this.header.setNext(newNode);
@@ -78,8 +78,20 @@ public class DoublyLinkedList<E> implements IDoublyLinkedList<E> {
 
     @Override
     public E get(int index) {
-        //TODO
-        return null;
+        if (isEmpty()) {
+            throw new EmptyListException("Cannot acquire an element of an empty list!");
+        }
+
+        if (index < 0 || index >= this.size) {
+            throw new IndexOutOfBoundsException("Index '" + index
+                    + "' is out of bounds for a list of size '" + this.size + "'!");
+        }
+
+        DoubleNode<E> currentNode = this.header.getNext();
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.getNext();
+        }
+        return currentNode.getData();
     }
 
     @Override
@@ -93,7 +105,7 @@ public class DoublyLinkedList<E> implements IDoublyLinkedList<E> {
     @Override
     public E getLast() {
         if (isEmpty()) {
-            throw new EmptyListException("Cannot acquire the first element of an empty list!");
+            throw new EmptyListException("Cannot acquire the last element of an empty list!");
         }
         return this.trailer.getPrev().getData();
     }

@@ -98,6 +98,10 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public E get(int index) {
+        if (isEmpty()) {
+            throw new EmptyListException("Cannot acquire an element of an empty list!");
+        }
+
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Index '" + index
                     + "' is out of bounds for a list of size '" + this.size + "'!");
