@@ -1,4 +1,6 @@
-package datastructures.stack;
+package datastructures.stack.impl;
+
+import datastructures.stack.api.IStack;
 
 import java.util.EmptyStackException;
 

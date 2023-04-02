@@ -1,4 +1,4 @@
-package datastructures.stack;
+package datastructures.stack.api;
 
 public interface IStack<E> {
     void push(E element);

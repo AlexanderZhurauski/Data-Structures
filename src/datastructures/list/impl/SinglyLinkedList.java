@@ -1,6 +1,7 @@
-package datastructures.list;
+package datastructures.list.impl;
 
 import datastructures.exceptions.EmptyListException;
+import datastructures.list.api.IList;
 
 import java.util.Collection;
 
@@ -57,6 +58,11 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void add(int index, E element) {
+        if (isEmpty() && this.size == 0) {
+            addFirst(element);
+            return;
+        }
+
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Index '" + index
                     + "' is out of bounds for a list of size '" + this.size + "'!");
@@ -122,45 +128,15 @@ public class SinglyLinkedList<E> implements IList<E> {
     }
 
     @Override
-    public void removeFirst() {
+    public E removeFirst() {
         if (isEmpty()) {
             throw new EmptyListException("Cannot remove the first element of an empty list!");
         }
 
+        E returnValue = this.head.getData();
         this.head = this.head.getNext();
         this.size--;
-    }
-    @Override
-    public void remove(int index) {
-        if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException("Index '" + index
-                    + "' is out of bounds for a list of size '" + this.size + "'!");
-        }
-
-        if (index == 0) {
-            this.head = this.head.getNext();
-            if (this.head == null) {
-                this.tail = null;
-            }
-            this.size--;
-            return;
-        }
-
-        if (index == this.size - 1) {
-            this.tail = null;
-            this.size--;
-            return;
-        }
-
-        Node<E> currentNode = this.head;
-        int currentIndex = 0;
-        while (currentIndex < index - 1) {
-            currentNode = currentNode.getNext();
-            currentIndex++;
-        }
-
-        currentNode.setNext(currentNode.getNext().getNext());
-        this.size--;
+        return returnValue;
     }
 
     @Override

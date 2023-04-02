@@ -1,4 +1,4 @@
-package datastructures.list;
+package datastructures.list.api;
 
 public interface IList<E> {
 
@@ -9,8 +9,7 @@ public interface IList<E> {
     E getFirst();
     E getLast();
     void set(int index, E element);
-    void removeFirst();
-    void remove(int index);
+    E removeFirst();
     int indexOf(E element);
     boolean contains(E element);
     int size();
