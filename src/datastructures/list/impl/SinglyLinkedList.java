@@ -58,7 +58,7 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void add(int index, E element) {
-        if (isEmpty() && this.size == 0) {
+        if (isEmpty() && index == 0) {
             addFirst(element);
             return;
         }
