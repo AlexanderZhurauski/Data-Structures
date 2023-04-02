@@ -21,6 +21,10 @@ public class CircularlyLinkedList<E> implements ICircularlyLinkedList<E> {
 
     @Override
     public void addFirst(E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         Node<E> newNode = new Node<>(element);
         if (isEmpty()) {
             this.tail = newNode;
@@ -41,6 +45,10 @@ public class CircularlyLinkedList<E> implements ICircularlyLinkedList<E> {
 
     @Override
     public void add(int index, E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (isEmpty() && index == 0) {
             addFirst(element);
             return;
@@ -104,6 +112,10 @@ public class CircularlyLinkedList<E> implements ICircularlyLinkedList<E> {
 
     @Override
     public void set(int index, E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Index '" + index
                     + "' is out of bounds for a list of size '" + this.size + "'!");

@@ -21,6 +21,9 @@ public class SinglyLinkedList<E> implements IList<E> {
         if (!collection.isEmpty()) {
             Node<E> currentNode = new Node<>();
             for (E element : collection) {
+                if (element == null) {
+                    throw new NullPointerException();
+                }
                 currentNode.setData(element);
                 currentNode.setNext(new Node<>());
                 currentNode = currentNode.getNext();
@@ -32,6 +35,10 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void addFirst(E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (isEmpty()) {
             this.head = new Node<>(element);
             this.tail = this.head;
@@ -45,6 +52,10 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void addLast(E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (isEmpty()) {
             this.head = new Node<>(element);
             this.tail = this.head;
@@ -58,6 +69,10 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void add(int index, E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (isEmpty() && index == 0) {
             addFirst(element);
             return;
@@ -112,6 +127,14 @@ public class SinglyLinkedList<E> implements IList<E> {
 
     @Override
     public void set(int index, E element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
+        if (isEmpty()) {
+            throw new EmptyListException("Cannot change the value of an element of an empty list!");
+        }
+
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Index '" + index
                     + "' is out of bounds for a list of size '" + this.size + "'!");
